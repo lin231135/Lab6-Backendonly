@@ -1,0 +1,74 @@
+Documentación de la API LLMS
+============================
+
+Descripción General:
+--------------------
+La API LLMS proporciona acceso a una base de datos de series de TV y anime, permitiendo a los usuarios recuperar, crear, actualizar y eliminar información sobre las series. Esta API está estructurada en torno a los principios REST y utiliza códigos de respuesta HTTP estándar y métodos.
+
+
+Puntos de Acceso (endpoints):
+-----------------
+1. GET /api/series
+   Descripción: Recupera una lista de todas las series en la base de datos.
+   Método: GET
+   URL: /api/series
+   Respuesta: Arreglo JSON de objetos de series.
+
+2. GET /api/series/:id
+   Descripción: Recupera información detallada sobre una serie específica por su ID.
+   Método: GET
+   URL: /api/series/:id (Reemplaza :id con el ID real de la serie)
+   Respuesta: Un objeto JSON que representa la serie.
+
+3. POST /api/series
+   Descripción: Crea una nueva entrada de serie en la base de datos.
+   Método: POST
+   URL: /api/series
+   Datos requeridos: Objeto JSON que contiene 'title', 'status', 'lastEpisodeWatched', 'totalEpisodes', y 'ranking'.
+   Ejemplo: { "title": "Nueva Serie", "status": "En curso", "lastEpisodeWatched": 10, "totalEpisodes": 50, "ranking": 5 }
+   Respuesta: Un objeto JSON de la serie creada.
+
+4. PUT /api/series/:id
+   Descripción: Actualiza una serie existente por su ID.
+   Método: PUT
+   URL: /api/series/:id
+   Datos requeridos: Objeto JSON con campos para actualizar ('title', 'status', 'lastEpisodeWatched', etc.).
+   Respuesta: Un objeto JSON de la serie actualizada.
+
+5. DELETE /api/series/:id
+   Descripción: Elimina una serie por su ID.
+   Método: DELETE
+   URL: /api/series/:id
+   Respuesta: Estado HTTP 204 No Content en caso de éxito.
+
+6. PATCH /api/series/:id/status
+   Descripción: Actualiza el estado de una serie.
+   Método: PATCH
+   URL: /api/series/:id/status
+   Datos requeridos: Objeto JSON que contiene 'status'.
+   Ejemplo: { "status": "Completado" }
+   Respuesta: Un objeto JSON de la serie actualizada.
+
+7. PATCH /api/series/:id/episode
+   Descripción: Incrementa en uno el último episodio visto de una serie.
+   Método: PATCH
+   URL: /api/series/:id/episode
+   Respuesta: Un objeto JSON de la serie actualizada.
+
+8. PATCH /api/series/:id/upvote
+   Descripción: Incrementa en uno la puntuación de una serie.
+   Método: PATCH
+   URL: /api/series/:id/upvote
+   Respuesta: Un objeto JSON de la serie actualizada.
+
+9. PATCH /api/series/:id/downvote
+   Descripción: Disminuye en uno la puntuación de una serie.
+   Método: PATCH
+   URL: /api/series/:id/downvote
+   Respuesta: Un objeto JSON de la serie actualizada.
+
+Notas de Uso:
+-------------
+- Todas las respuestas incluyen códigos de estado HTTP apropiados.
+- Se implementa manejo de errores para todos los puntos de acceso. Los errores devolverán un objeto JSON que contiene un mensaje de error y, cuando sea aplicable, un código de estado HTTP.
+- Se realiza validación de datos en el servidor. Asegúrate de incluir todos los campos requeridos en las solicitudes POST y PUT.
